@@ -1,11 +1,17 @@
 import 'stock_item.dart';
 import 'user_model.dart';
+import 'supplier_label_model.dart';
+import 'supplier_model.dart';
 
 class SampleDataService {
   final List<StockItem> items;
   final List<UserModel> users;
+  final List<SupplierLabel> supplierLabels;
+  final List<SupplierModel> suppliers;
 
-  SampleDataService({required this.items, required this.users});
+  SampleDataService({required this.items, required this.users, List<SupplierLabel>? supplierLabels, List<SupplierModel>? suppliers})
+      : supplierLabels = supplierLabels ?? [],
+        suppliers = suppliers ?? [];
 
   factory SampleDataService.sample() {
     final items = [
@@ -22,6 +28,27 @@ class SampleDataService {
     ];
 
     return SampleDataService(items: items, users: users);
+  }
+
+  // Supplier label management
+  List<SupplierLabel> getLabels() => supplierLabels;
+
+  void addLabel(String name) {
+    final id = 'L${(supplierLabels.length + 1).toString().padLeft(3, '0')}';
+    supplierLabels.add(SupplierLabel(id: id, name: name));
+  }
+
+  // Supplier management
+  List<SupplierModel> getSuppliersByLabel(String labelId) => suppliers.where((s) => s.labelId == labelId).toList();
+
+  String _nextSupplierId() {
+    final count = suppliers.length + 1;
+    return 'S${count.toString().padLeft(3, '0')}';
+  }
+
+  void addSupplier({required String name, String? address, String? contact, String? website, required String labelId}) {
+    final id = _nextSupplierId();
+    suppliers.add(SupplierModel(id: id, name: name, address: address, contact: contact, website: website, labelId: labelId));
   }
 
   Map<String, int> categoryDistributionPercent() {
