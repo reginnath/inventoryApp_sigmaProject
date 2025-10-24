@@ -16,7 +16,7 @@ class MenuPage extends StatelessWidget {
       _MenuTile(icon: Icons.add_box, label: 'New Inventory'),
       _MenuTile(icon: Icons.add, label: 'Add Stock'),
       _MenuTile(icon: Icons.outbox, label: 'Barang Keluar'),
-      _MenuTile(icon: Icons.report, label: 'Report'),
+      _MenuTile(icon: Icons.upload, label: 'Report'),
       _MenuTile(icon: Icons.admin_panel_settings, label: 'Roles'),
     ];
 
