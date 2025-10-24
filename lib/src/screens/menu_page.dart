@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/sample_data.dart';
 import '../widgets/icon_tile.dart';
+import 'new_inventory_page.dart';
 
 class MenuPage extends StatelessWidget {
   final SampleDataService data;
@@ -11,10 +12,9 @@ class MenuPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final tiles = [
       _MenuTile(icon: Icons.people, label: 'Supplier'),
-      _MenuTile(icon: Icons.store, label: 'Warehouse'),
+      _MenuTile(icon: Icons.store, label: 'Storage'),
       _MenuTile(icon: Icons.add_box, label: 'New Inventory'),
       _MenuTile(icon: Icons.add, label: 'Add Stock'),
-      _MenuTile(icon: Icons.delete, label: 'Delete'),
       _MenuTile(icon: Icons.outbox, label: 'Barang Keluar'),
       _MenuTile(icon: Icons.report, label: 'Report'),
       _MenuTile(icon: Icons.admin_panel_settings, label: 'Roles'),
@@ -26,7 +26,20 @@ class MenuPage extends StatelessWidget {
         crossAxisCount: 4,
         mainAxisSpacing: 8,
         crossAxisSpacing: 8,
-        children: tiles.map((t) => IconTile(icon: t.icon, label: t.label)).toList(),
+        children: tiles.map((t) {
+          if (t.label == 'New Inventory') {
+            return IconTile(
+              icon: t.icon,
+              label: t.label,
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (_) => NewInventoryPage(data: data),
+                ));
+              },
+            );
+          }
+          return IconTile(icon: t.icon, label: t.label);
+        }).toList(),
       ),
     );
   }
