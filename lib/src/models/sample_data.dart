@@ -1,11 +1,14 @@
 import 'stock_item.dart';
 import 'user_model.dart';
+import 'storage_model.dart';
 
 class SampleDataService {
   final List<StockItem> items;
   final List<UserModel> users;
+  final List<StorageModel> storages;
 
-  SampleDataService({required this.items, required this.users});
+  SampleDataService({required this.items, required this.users, List<StorageModel>? storages})
+      : storages = storages ?? [];
 
   factory SampleDataService.sample() {
     final items = [
@@ -47,5 +50,23 @@ class SampleDataService {
   List<StockItem> expiringWithinDays(int days) {
     final now = DateTime.now();
     return items.where((i) => i.expiry != null && i.expiry!.difference(now).inDays <= days).toList();
+  }
+
+  // Storage management
+  List<StorageModel> getStorages() => storages;
+
+  void addStorage(String name) {
+    final id = 'STR${(storages.length + 1).toString().padLeft(3, '0')}';
+    storages.add(StorageModel(id: id, name: name));
+  }
+
+  void addItemToStorage(String storageId, String itemId, String itemName, int quantity, DateTime? expiryDate) {
+    final storage = storages.firstWhere((s) => s.id == storageId);
+    storage.items.add(StorageItemInfo(
+      itemId: itemId,
+      itemName: itemName,
+      quantity: quantity,
+      expiryDate: expiryDate,
+    ));
   }
 }
