@@ -12,7 +12,7 @@ class MenuPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final tiles = [
       _MenuTile(icon: Icons.people, label: 'Supplier'),
-      _MenuTile(icon: Icons.store, label: 'Warehouse'),
+      _MenuTile(icon: Icons.store, label: 'Storage'),
       _MenuTile(icon: Icons.add_box, label: 'New Inventory'),
       _MenuTile(icon: Icons.add, label: 'Add Stock'),
       _MenuTile(icon: Icons.outbox, label: 'Barang Keluar'),
