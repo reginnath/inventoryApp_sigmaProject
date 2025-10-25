@@ -163,3 +163,7 @@ app.*.symbols
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 !/dev/ci/**/Gemfile.lock
 >>>>>>> d3b381fc804dd0dceb5bf2b38a1c69649339dc37
+
+# Abaikan semua file .json di luar google-services.json
+*.json
+!android/app/google-services.json
